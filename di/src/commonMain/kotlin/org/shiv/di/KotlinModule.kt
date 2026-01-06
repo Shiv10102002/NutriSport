@@ -7,11 +7,13 @@ import org.koin.dsl.module
 import org.shiv.CustomerRepositoryImpl
 import org.shiv.auth.AuthViewModel
 import org.shiv.data.domain.CustomerRepository
+import org.shiv.home.HomeGraphViewModel
 
 
 val sharedModule = module {
     single<CustomerRepository> { CustomerRepositoryImpl() }
     viewModelOf(::AuthViewModel)
+    viewModelOf(::HomeGraphViewModel)
 }
 
 

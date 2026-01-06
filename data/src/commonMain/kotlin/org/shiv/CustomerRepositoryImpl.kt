@@ -7,6 +7,7 @@ import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.firestore
 import org.shiv.data.domain.CustomerRepository
 import org.shiv.shared.domain.Customer
+import org.shiv.shared.util.RequestState
 
 class CustomerRepositoryImpl : CustomerRepository {
     override fun getCurrentUserId(): String? {
@@ -40,6 +41,15 @@ class CustomerRepositoryImpl : CustomerRepository {
             }
         }catch (e: Exception){
             onError("Error while creating a Customer: ${e.message}")
+        }
+    }
+
+    override suspend fun signOut(): RequestState<Unit> {
+        try {
+            Firebase.auth.signOut()
+            return RequestState.Success(data = Unit)
+        }catch (e: Exception){
+           return RequestState.Error("Error occurred while signOut: ${e.message}")
         }
     }
 

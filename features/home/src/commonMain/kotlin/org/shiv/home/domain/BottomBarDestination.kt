@@ -8,8 +8,8 @@ enum class BottomBarDestination(
     val icon: DrawableResource,
     val title: String,
     val screen: Screen
-){
-    ProductOverView(
+) {
+    ProductsOverview(
         icon = Resources.Icon.Home,
         title = "Nutri Sport",
         screen = Screen.ProductOverView
@@ -17,11 +17,11 @@ enum class BottomBarDestination(
     Cart(
         icon = Resources.Icon.ShoppingCart,
         title = "Cart",
-        screen = Screen.ProductOverView
+        screen = Screen.Cart
     ),
     Categories(
         icon = Resources.Icon.Categories,
         title = "Categories",
-        screen = Screen.ProductOverView
-    ),
+        screen = Screen.Categories
+    )
 }
