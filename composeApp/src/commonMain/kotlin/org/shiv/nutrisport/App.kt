@@ -1,0 +1,40 @@
+package org.shiv.nutrisport
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.mmk.kmpauth.google.GoogleAuthCredentials
+import com.mmk.kmpauth.google.GoogleAuthProvider
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
+import org.shiv.data.domain.CustomerRepository
+import org.shiv.shared.navigation.Screen
+import org.shiv.navigation.SetUpNavGraph
+import org.shiv.shared.Constants.WEB_CLIENT_ID
+
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var appReady by remember { mutableStateOf(false) }
+        val customerRepository = koinInject<CustomerRepository>()
+        val isUserAuthenticated = remember { customerRepository.getCurrentUserId()!=null }
+
+        val startDestination = remember {
+            if(isUserAuthenticated) Screen.HomeGraph
+            else Screen.Auth
+        }
+        LaunchedEffect(Unit) {
+            GoogleAuthProvider.create(credentials = GoogleAuthCredentials(serverId = WEB_CLIENT_ID))
+            appReady = true
+        }
+        AnimatedVisibility(
+            visible = appReady
+        ) { SetUpNavGraph(startDestination) }
+    }
+}
