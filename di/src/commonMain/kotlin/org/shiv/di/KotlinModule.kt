@@ -8,12 +8,14 @@ import org.shiv.CustomerRepositoryImpl
 import org.shiv.auth.AuthViewModel
 import org.shiv.data.domain.CustomerRepository
 import org.shiv.home.HomeGraphViewModel
+import org.shiv.profile.ProfileViewModel
 
 
 val sharedModule = module {
     single<CustomerRepository> { CustomerRepositoryImpl() }
     viewModelOf(::AuthViewModel)
     viewModelOf(::HomeGraphViewModel)
+    viewModelOf(::ProfileViewModel)
 }
 
 

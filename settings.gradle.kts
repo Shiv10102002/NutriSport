@@ -29,8 +29,10 @@ dependencyResolutionManagement {
 }
 include(":data")
 include(":di")
+include(":features:admin_panel")
 include(":features:auth")
 include(":features:home")
+include(":features:profile")
 include(":navigation")
 include(":shared")
 include(":composeApp")

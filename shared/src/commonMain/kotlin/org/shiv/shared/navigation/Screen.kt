@@ -10,6 +10,9 @@ sealed class Screen {
     data object HomeGraph : Screen()
 
     @Serializable
+    data object Profile : Screen()
+
+    @Serializable
     data object ProductOverView : Screen()
 
     @Serializable
@@ -17,5 +20,8 @@ sealed class Screen {
 
     @Serializable
     data object Categories : Screen()
+
+    @Serializable
+    data object AdminPanel : Screen()
 
 }

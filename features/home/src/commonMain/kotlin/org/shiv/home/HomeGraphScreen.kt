@@ -64,7 +64,9 @@ import rememberMessageBarState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeGraphScreen(
-    navigateToAuth:()->Unit
+    navigateToAuth:()->Unit,
+    navigateToProfile: () -> Unit,
+    navigateToAdminPanel: () -> Unit,
 ){
     val navController = rememberNavController()
     val currentRoute = navController.currentBackStackEntryAsState()
@@ -106,7 +108,7 @@ fun HomeGraphScreen(
         modifier = Modifier.fillMaxSize().background(animatedBackground).systemBarsPadding()
     ) {
         CustomDrawer(
-            onProfileClick = {},
+            onProfileClick = navigateToProfile,
             onSignOutClick = {
                 viewModel.signOut(
                     onSuccess = navigateToAuth,
@@ -114,7 +116,7 @@ fun HomeGraphScreen(
                 )
             },
             onContactUsClick = {},
-            onAdminPanelClick = {},
+            onAdminPanelClick = navigateToAdminPanel
         )
 
         Box(

@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.google.services)
-    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -20,7 +18,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "navigation"
+            baseName = "admin_panel"
             isStatic = true
             export(libs.kmp.notifier)
         }
@@ -37,14 +35,11 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.messagebar.kmp)
-            implementation(libs.auth.kmp)
-            implementation(libs.compose.navigation)
-            implementation(libs.kotlinx.serialization)
+
+            implementation(libs.koin.compose.viewmodel)
+
             implementation(project(path = ":shared"))
-            implementation(project(path = ":features:auth"))
-            implementation(project(path = ":features:home"))
-            implementation(project(path = ":features:profile"))
-            implementation(project(path = ":features:admin_panel"))
+            implementation(project(path = ":data"))
 
         }
         commonTest.dependencies {
@@ -54,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "org.shiv.navigation"
+    namespace = "org.shiv.admin_panel"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
